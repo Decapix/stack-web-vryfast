@@ -1,0 +1,30 @@
+services:
+  fastapi:
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.9
+    volumes:
+      - ./fastapi:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=dev
+      - DATABASE_URL=postgres://postgres:password@supabase:5432/postgres
+
+  supabase:
+    image: supabase/supabase-postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+  streamlit:
+    image: streamlit:latest
+    volumes:
+      - ./streamlit:/app
+    ports:
+      - "8501:8501"
+    environment:
+      - SUPABASE_URL=http://supabase:5432
+      - SUPABASE_KEY=your_supabase_key
+    command: streamlit run your_streamlit_app.py
