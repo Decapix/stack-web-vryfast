@@ -16,3 +16,8 @@ Each of the APIs are available through the same API gateway:
     Auth: http://<your-domain>:8000/auth/v1/
     Storage: http://<your-domain>:8000/storage/v1/
     Realtime: http://<your-domain>:8000/realtime/v1/
+
+
+
+doc :
+https://supabase.com/docs/guides/self-hosting/docker#accessing-supabase-studio
