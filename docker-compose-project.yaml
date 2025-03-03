@@ -6,13 +6,12 @@ services:
     volumes:
       - ./backend/app:/app
     ports:
-      - "8000:8000"
+      - "8502:8000"
     env_file:
       - .env
-    depends_on:
-      - supabase
     networks:
       - app-network
+
 
   frontend:
     build: ./frontend
@@ -24,23 +23,8 @@ services:
       - app-network
     env_file:
       - .env
-    depends_on:
-      - supabase
 
-  supabase:
-    image: supabase/supabase-postgres:latest
-    env_file:
-      - .env
-    ports:
-      - "5432:5432"
-    volumes:
-      - supabase-data:/var/lib/postgresql/data
-    networks:
-      - app-network
 
 networks:
   app-network:
     driver: bridge
-
-volumes:
-  supabase-data:

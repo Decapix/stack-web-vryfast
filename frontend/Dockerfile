@@ -1,5 +1,5 @@
 # frontend/Dockerfile
-FROM python:3.13-alpine3.21
+FROM python:3.10-slim
 WORKDIR /app
 
 COPY requirements.txt .

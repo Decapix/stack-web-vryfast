@@ -3,7 +3,7 @@ import logging
 
 router = APIRouter()
 
-@router.get("/home")
+@router.get("/")
 async def home(n: int = 10):
     """home"""
     logging.info("home call")
