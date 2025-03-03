@@ -8,7 +8,7 @@ to run :
 1. make the run.sh executable :
 chmod +x run.sh
 2. run :
-run.sh up
+./run.sh up-prod
 
 
 Documentation des commandes run.sh :
