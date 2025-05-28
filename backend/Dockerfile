@@ -1,13 +1,25 @@
-# backend/Dockerfile
-FROM python:3.13-alpine3.21
+FROM python:3.11-slim
 
 WORKDIR /app
 
+# Install dependencies including wait-for-it and curl
+RUN apt-get update && apt-get install -y netcat-openbsd curl && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
+COPY . .
 
-# Copie du reste de l'application
-COPY ./app /app
+# Script to create initial admin user if none exists
+COPY ./scripts/init_user.py /app/scripts/init_user.py
+RUN chmod +x /app/scripts/init_user.py
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Create a startup script that waits for MongoDB
+COPY ./scripts/start.sh /app/scripts/start.sh
+RUN chmod +x /app/scripts/start.sh
+
+# Set Python path to include the app directory
+ENV PYTHONPATH=/app
+
+# Use the startup script
+CMD ["/app/scripts/start.sh"]

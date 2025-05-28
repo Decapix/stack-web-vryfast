@@ -1,46 +1,83 @@
-# Fichiers et répertoires générés par Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Environnements virtuels
-venv/
-env/
-.venv/
-ENV/
-.env
+# C extensions
+*.so
 
-# Fichiers de configuration sensible
-.env
-.secrets
-config.py
-
-# Fichiers de cache et logs
-.pytest_cache/
-*.log
-logs/
-
-# Fichiers de build et distribution
+# Distribution / packaging
+.Python
 build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
+.installed.cfg
 *.egg
 
-# Fichiers de développement
-.ipynb_checkpoints/
-*.ipynb
+# PyInstaller
+#  Usually these files are not needed, so it's safe to ignore them
+*.manifest
+*.spec
 
-# Fichiers de base de données
-*.db
-*.sqlite3
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Fichiers de Streamlit
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Streamlit
 .streamlit/
 
-# Fichiers de IDE
-.vscode/
-.idea/
+# FastAPI
+__pycache__/
 
+# Miscellaneous
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+.DS_Store
+*.sqlite3
+*.db
 
-# supabase
-supabase/

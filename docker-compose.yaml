@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mev-form-mongodb
+    restart: always
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongodb_data:/data/db
+    command: ["mongod", "--logpath", "/dev/null"]
+    env_file:
+      - .env
+    networks:
+      - mev-network
+
+  backend:
+    build: ./backend
+    container_name: mev-form-backend
+    restart: always
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    networks:
+      - mev-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    container_name: mev-form-frontend
+    restart: always
+    ports:
+      - "${FRONTEND_PORT:-8501}:8501"
+    depends_on:
+      backend:
+        condition: service_healthy
+    env_file:
+      - .env
+    networks:
+      - mev-network
+    volumes:
+      - ./frontend/app:/app/app
+    environment:
+      - STREAMLIT_SERVER_RUN_ON_SAVE=true
+
+volumes:
+  mongodb_data:
+
+networks:
+  mev-network:
+    driver: bridge
